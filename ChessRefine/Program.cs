@@ -1,23 +1,29 @@
+using ChessRefine.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddControllersWithViews();
+// Servicees
+
+builder.Services.AddSingleton(
+    new StockfishService("C:\\Users\\pawqy\\stockfish\\stockfish-windows-x86-64-avx2.exe") // sciezka do stockfisha
+);
+
+builder.Services.AddScoped<GameAnalysisService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+// Wylaczenie redirection to httpS, na podstawie testow
+//app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 app.Run();

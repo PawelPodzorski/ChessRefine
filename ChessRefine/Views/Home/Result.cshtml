@@ -1,0 +1,38 @@
+﻿@model List<ChessRefine.Models.MoveAnalysis>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>ChessRefine – Analysis Result</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>Move-by-move evaluation</h2>
+
+        <table border="1">
+            <tr>
+                <th>#</th>
+                <th>Move</th>
+                <th>Evaluation</th>
+                <th>FEN</th>
+                <th>White?</th>
+            </tr>
+
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.MoveNumber</td>
+                    <td>@m.Move</td>
+                    <td>@m.Evaluation</td>
+                    <td>@m.Fen</td>
+                    <td>@m.IsWhiteMove</td>
+                </tr>
+            }
+        </table>
+
+        <a href="/" class="analyze-btn">Back</a>
+    </div>
+</body>
+</html>

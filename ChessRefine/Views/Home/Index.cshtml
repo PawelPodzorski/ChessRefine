@@ -1,0 +1,30 @@
+﻿@model ChessRefine.Models.AnalysisRequest
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>ChessRefine – PGN Analysis</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>ChessRefine – PGN Analysis</h1>
+        <p>Paste your chess game in PGN format below and analyze it move by move.</p>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="error">@TempData["Error"]</div>
+        }
+
+        <form action="Home/Analyze" method="post">
+            <textarea name="Pgn" id="pgn" rows="12" placeholder="Paste PGN here...">@Model.Pgn</textarea>
+
+            <label for="Depth">Analysis Depth:</label>
+            <input type="number" id="Depth" name="Depth" value="@Model.Depth" min="1" max="30" />
+
+            <button type="submit" class="analyze-btn">Analyze Game</button>
+        </form>
+    </div>
+</body>
+</html>
