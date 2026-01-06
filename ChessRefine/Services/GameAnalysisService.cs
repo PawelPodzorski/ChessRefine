@@ -27,7 +27,7 @@ namespace ChessRefine.Services
             var board = new ChessBoard();
 
             var result = new List<MoveAnalysis>();
-            int moveNumber = 1;
+            int moveNumber = 0;
             int movesMade = 0;
 
             // number of moves in whole game

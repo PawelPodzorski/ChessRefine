@@ -122,3 +122,39 @@ progress {
         #moves-list li.black-move {
             background-color: #fff0f0;
         }
+
+
+#whiteMoves li, #blackMoves li {
+    border-radius: 4px;
+}
+
+    #whiteMoves li:hover, #blackMoves li:hover {
+        background-color: #e0f7ff;
+    }
+
+#movesList {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+button {
+    margin: 2px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+#evalContainer {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#evalBar {
+    transition: height 0.3s ease, bottom 0.3s ease, background 0.3s ease;
+}
+
+#evalTopLabel, #evalBottomLabel {
+    transition: all 0.3s ease;
+}
+
+

@@ -1,4 +1,5 @@
 ﻿@model List<ChessRefine.Models.MoveAnalysis>
+@using System.Text.Json
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,8 +7,60 @@
     <meta charset="utf-8" />
     <title>ChessRefine – Analysis Result</title>
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- chessboard.css -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css" />
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- chessboard.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+
+    <script>
+        const moves = @Html.Raw(JsonSerializer.Serialize(Model));
+    </script>
+    <script src="~/js/gameReplay.js"></script>
 </head>
+
+
 <body>
+    <div class="container">
+        <h2>Game Replay</h2>
+
+        <div style="display:flex; gap:20px;">
+            <!-- Eval Bar -->
+            <div id="evalContainer" style="width:50px; height:400px; border:1px solid #ccc; background:#f0f0f0; position:relative;">
+                <div id="evalBar" style="position:absolute; bottom:50%; width:100%;"></div>
+                
+                <div id="evalTopLabel" style="position:absolute; bottom:50%; left:0; width:100%; text-align:center; font-weight:bold; font-size:12px; color:black;">-</div>
+                <div id="evalBottomLabel" style="position:absolute; bottom:50%; left:0; width:100%; text-align:center; font-weight:bold; font-size:12px; color:black;">0.0</div>
+            </div>
+
+
+            <!-- chess board -->
+            <div>
+                <div id="board" style="width:400px; margin-bottom:10px;"></div>
+
+                <div style="text-align:center; margin-top:10px;">
+                    <button onclick="firstMove()">⏮ First</button>
+                    <button onclick="prevMove()">◀ Prev</button>
+                    <button onclick="nextMove()">Next ▶</button>
+                    <button onclick="lastMove()">Last ⏭</button>
+                </div>
+
+            </div>
+
+            <!-- scoresheet -->
+            <div id="movesList" style="flex:1; display:flex; gap:10px;">
+                <ul id="whiteMoves" style="list-style:none; padding:0; flex:1;"></ul>
+                <ul id="blackMoves" style="list-style:none; padding:0; flex:1;"></ul>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container">
         <h2>Move-by-move evaluation</h2>
 
@@ -34,5 +87,6 @@
 
         <a href="/" class="analyze-btn">Back</a>
     </div>
+
 </body>
 </html>
